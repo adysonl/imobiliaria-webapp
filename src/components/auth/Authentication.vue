@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <span> Autenticação </span>
-        <router-link to="auth/signin"> Login </router-link>
-        <span> Cadastro </span>
-    </div>
+  <div class="auth-page centered">
+    <img src="../../assets/init-page.png"/>
+    <br/>
+    <br/>
+    <router-link :to="{name: 'SignIn'}"><button> Login </button></router-link>
+    <router-link :to="{name: 'SignUp'}"><button> Cadastrar </button></router-link>
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -11,5 +14,16 @@
 </script>
 
 <style>
+.auth-page {
+  width: 350px;
+  height: 450px;
+  text-align: center;
+}
 
+.auth-page button {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 10px;
+  font-weight: 650px;
+}
 </style>
