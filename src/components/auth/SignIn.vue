@@ -1,62 +1,72 @@
 <template>
-  <div class="login">
+  <div id="login" class="auth login centered">
+    <img src="../../assets/login.png"/>
     <form>
       <div class="form-group">
         <label for="username">USERNAME</label>
-        <input name="username" type="text">
+        <input v-model="username" name="username" type="text" required>
       </div>
 
       <div class="form-group">
-        <label for="username">SENHA</label>  
-        <input name="password" type="password">
-        <div class="error"></div>
+        <label for="username">SENHA</label>
+        <input v-model="password" name="password" type="password" required minlength="6">
+        <div class="error">{{ error }}</div>
       </div>
-      <button>entrar</button>
+      <button @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>
     </form>
+    <div class="back-link"><router-link :to="{name: 'Auth'}">← Voltar</router-link></div>
   </div>
 </template>
 
 <script>
-    
+import axios from 'axios'
+
+export default {
+  data () {
+    return {
+      username: '',
+      error: '',
+      password: '',
+      submit: function (event) {
+        axios.post('http://localhost:3000/auth/login', {login: this.username, password: this.password})
+          .then(response => {
+            localStorage.setItem('token', response.data.token)
+            this.$router.push('/')
+          })
+          .catch(e => {
+            this.error = e.response.data.error
+          })
+      }
+    }
+  }
+}
 </script>
 
 <style>
-  .login {
+  .auth {
     background: var(--gray);
     width: 300px;
     padding: 23px
   }
 
-  .login input {
-    width: 304px;
+  .auth input {
+    width: 100%;
+    border: 0px
   }
 
-  .login button {
-    width: 308px;
-    border: 
-  }
-  input, button {
-    height: 23px;
-    font-family: 'Exo';
-    font-size: 16px;
+  .auth button {
+    width: 300px;
   }
 
-  .form-group {
-    margin-bottom: 10px;
-    text-align: left;
+  .login {
+    height: 300px;
   }
 
-  .form-group .error{
-    font-size: 13px;
-    color: #ff0000;
-    height: 13px;
-  }
-  button {
-    text-transform: uppercase;
-    background: var(--med);
-    border: none;
-    color: #fff;
-    border-bottom: 4px solid var(--dark);
-    height: 29px;
+  .back-link {
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    text-align: right;
+    margin-top: 40px;
   }
 </style>
