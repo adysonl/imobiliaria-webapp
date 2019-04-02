@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <header-menu></header-menu>
     <router-view/>
   </div>
 </template>
 
 <script>
-import headerMenu from './components/core/HeaderMenu.vue'
 export default {
-  name: 'App',
-  components: {headerMenu}
+  name: 'App'
 }
 </script>
 

@@ -1,11 +1,16 @@
 <template>
   <nav>
     <div class="logo">
-      <img src="../../assets/header-logo.png" height="60px">
+      <router-link :to="{name: 'Home'}"><img src="../../assets/header-logo.png" /></router-link>
+      <button class="logout-btn" @click.prevent="logout()">
+        sair
+      </button>
     </div>
 
       <ul class="menu">
-        <li v-for="item in items"><router-link v-bind:to="item.url">{{ item.title }}</router-link></li>
+        <li v-for="item in items" :key="item.index">
+          <router-link :to="item.url">{{ item.title }}</router-link>
+        </li>
       </ul>
   </nav>
 </template>
@@ -22,6 +27,12 @@ export default {
         {title: 'contratos', url: '/contratos'},
         {title: 'pagamentos', url: '/pagamentos'}
       ]
+    }
+  },
+  methods: {
+    logout: function () {
+      localStorage.removeItem('token')
+      this.$router.push({name: 'Auth'})
     }
   }
 }
