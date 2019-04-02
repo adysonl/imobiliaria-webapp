@@ -90,6 +90,14 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created: function () {
+    const token = localStorage.getItem('token')
+    if (token) {
+      console.log('ok')
+    } else {
+      this.$router.push({name: 'SignIn'})
+    }
   }
 }
 </script>
