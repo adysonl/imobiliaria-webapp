@@ -1,6 +1,6 @@
 <template>
   <div id="login" class="auth signup centered">
-    <img src="../../assets/login.png"/>
+    <img src="../../assets/images/login.png"/>
     <form>
       <div class="form-group">
         <label for="name">NOME</label>

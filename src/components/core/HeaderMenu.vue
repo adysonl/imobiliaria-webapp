@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="logo">
-      <router-link :to="{name: 'Home'}"><img src="../../assets/header-logo.png" /></router-link>
+      <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" /></router-link>
       <button class="logout-btn" @click.prevent="logout()">
         sair
       </button>
@@ -41,7 +41,7 @@ export default {
 <template>
   <nav>
     <div class="logo">
-      <router-link :to="{name: 'Home'}"><img src="../../assets/header-logo.png" /></router-link>
+      <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" /></router-link>
       <button class="logout-btn" @click.prevent="logout()">
         sair
       </button>

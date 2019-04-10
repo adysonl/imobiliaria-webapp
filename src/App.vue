@@ -26,10 +26,17 @@ export default {
   }
 
   body {
-    background: url('assets/bg.png');
+    background: url('assets/images/bg.png');
     width: 100vw;
     margin: 0;
   }
+  @font-face {
+    font-family: 'Exo';
+    src: url('./assets/fonts/Exo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
   #app {
     font-family: 'Exo', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

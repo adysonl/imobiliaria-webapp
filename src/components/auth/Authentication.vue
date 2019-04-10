@@ -1,6 +1,6 @@
 <template>
   <div class="auth-page centered">
-    <img src="../../assets/init-page.png"/>
+    <img src="../../assets/images/init-page.png"/>
     <br/>
     <br/>
     <router-link :to="{name: 'SignIn'}"><button> Login </button></router-link>
@@ -25,5 +25,20 @@
   height: 40px;
   margin-bottom: 10px;
   font-weight: 650px;
+}
+
+.auth {
+  background: var(--gray);
+  width: 300px;
+  padding: 23px
+}
+
+.auth input {
+  width: 100%;
+  border: 0px
+}
+
+.auth button {
+  width: 300px;
 }
 </style>

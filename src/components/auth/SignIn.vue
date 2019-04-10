@@ -1,6 +1,6 @@
 <template>
   <div id="login" class="auth login centered">
-    <img src="../../assets/login.png"/>
+    <img src="../../assets/images/login.png"/>
     <form>
       <div class="form-group">
         <label for="username">USERNAME</label>
@@ -43,21 +43,6 @@ export default {
 </script>
 
 <style>
-  .auth {
-    background: var(--gray);
-    width: 300px;
-    padding: 23px
-  }
-
-  .auth input {
-    width: 100%;
-    border: 0px
-  }
-
-  .auth button {
-    width: 300px;
-  }
-
   .login {
     height: 300px;
   }
