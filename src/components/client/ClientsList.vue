@@ -5,30 +5,26 @@
       <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
       <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
     </div>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <td> Nome </td>
-          <td> Phone </td>
-          <td> Tipo de Pessoa </td>
-          <td> CPF/CNPJ </td>
-          <td> RG </td>
-          <td> Email </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="entity in entities"
-            v-bind:class="{ selected : selectedId == entity.id }"
-            :key="entity.id"
-            @click.prevent="selectItem(entity.id)">
-          <td> {{ entity.name }} </td>
-          <td> {{ entity.phone }} </td>
-          <td> {{ entity.nationalType == 'individual' ? 'Pessoa Física' : 'Pessoa Jurídica'}} </td>
-          <td> {{ entity.nationalId }} </td>
-          <td> {{ entity.rg }} </td>
-          <td> {{ entity.email }} </td>
-        </tr>
-      </tbody>
+    <table class="data-table" summary="Lista de clientes">
+      <tr>
+        <th> Nome </th>
+        <th> Phone </th>
+        <th> Tipo de Pessoa </th>
+        <th> CPF/CNPJ </th>
+        <th> RG </th>
+        <th> Email </th>
+      </tr>
+      <tr v-for="entity in entities"
+          v-bind:class="{ selected : selectedId == entity.id }"
+          :key="entity.id"
+          @click.prevent="selectItem(entity.id)">
+        <td> {{ entity.name }} </td>
+        <td> {{ entity.phone }} </td>
+        <td> {{ entity.nationalType == 'individual' ? 'Pessoa Física' : 'Pessoa Jurídica'}} </td>
+        <td> {{ entity.nationalId }} </td>
+        <td> {{ entity.rg }} </td>
+        <td> {{ entity.email }} </td>
+      </tr>
     </table>
   </div>
 </template>
