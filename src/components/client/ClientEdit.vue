@@ -3,39 +3,39 @@
     <div class="title row center"><span>cadastro de cliente</span></div>
     <div class="form-group" style="width: 65%">
       <label for="name">NOME</label>
-      <input name="name" v-model="entity.name" type="text" required/>
+      <input id="name" name="name" v-model="entity.name" type="text" required/>
     </div>
     <div class="form-group" style="width: 30%">
       <label for="career">PROFISSÃO</label>
-      <input name="career" v-model="entity.career" type="text" required/>
+      <input id="career" name="career" v-model="entity.career" type="text" required/>
     </div>
 
     <div class="form-group" style="width: 30%">
       <label for="nationalType">TIPO DE PESSOA</label>
-      <select name="nationalType" v-model="entity.nationalType" required>
+      <select id="nationalType" name="nationalType" v-model="entity.nationalType" required>
         <option v-for="item in nationalTypes" :value="item.key" :key="item.key">{{ item.value }}</option>
       </select>
     </div>
     <div class="form-group" style="width: 32.5%">
       <label for="nationalId" v-if="entity.nationalType === 'individual'">CPF</label>
       <label for="nationalId" v-if="entity.nationalType === 'company'">CNPJ</label>
-      <input name="nationalId" v-model="entity.nationalId" type="text" required/>
+      <input id="nationalId" name="nationalId" v-model="entity.nationalId" type="text" required/>
     </div>
     <div class="form-group" style="width: 30%">
       <label for="rg">RG</label>
-      <input name="rg" v-model="entity.rg" type="text" required/>
+      <input id="rg" name="rg" v-model="entity.rg" type="text" required/>
     </div>
 
     <div class="form-group" style="width: 65%">
       <label for="email">EMAIL</label>
-      <input name="email" v-model="entity.email" type="email" required/>
+      <input id="email" name="email" v-model="entity.email" type="email" required/>
     </div>
     <div class="form-group" style="width: 30%">
       <label for="phone">TELEFONE</label>
-      <input name="phone" v-model="entity.phone" type="text" required/>
+      <input id="phone" name="phone" v-model="entity.phone" type="text" required/>
     </div>
     <div class="row-right">
-      <button @click.prevent="submit()">SALVAR</button>
+      <button @click.prevent="submit()" type="submit">SALVAR</button>
     </div>
   </form>
 </template>
