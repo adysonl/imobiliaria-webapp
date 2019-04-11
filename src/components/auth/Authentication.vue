@@ -1,7 +1,8 @@
 <template>
   <div class="auth-page centered">
-    <img src="../../assets/images/init-page.png"/>
-    <br/>
+    <a href="#">
+      <img src="../../assets/images/init-page.png" alt="AeR corretores tela de início"/>
+      </a>
     <br/>
     <router-link :to="{name: 'SignIn'}"><button> Login </button></router-link>
     <router-link :to="{name: 'SignUp'}"><button> Cadastrar </button></router-link>
