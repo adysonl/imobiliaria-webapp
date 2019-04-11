@@ -1,6 +1,8 @@
 <template>
   <form class="edit-form">
-    <div class="title row center"><span>{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</span></div>
+    <div class="title row center">
+      <span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</span>
+    </div>
 
     <div class="form-group" style="width: 75%">
       <label for="locator">PROPRIETÁRIO</label>

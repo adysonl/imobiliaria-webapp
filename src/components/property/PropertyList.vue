@@ -5,18 +5,15 @@
       <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
       <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
     </div>
-    <table class="data-table">
-      <thead>
+    <table class="data-table" summary="Lista de imóveis">
         <tr>
-          <td> Código </td>
-          <td> Quartos </td>
-          <td> Proprietário </td>
-          <td> Rua </td>
-          <td> Bairro </td>
-          <td> Cidade </td>
+          <th> Código </th>
+          <th> Quartos </th>
+          <th> Proprietário </th>
+          <th> Rua </th>
+          <th> Bairro </th>
+          <th> Cidade </th>
         </tr>
-      </thead>
-      <tbody>
         <tr v-for="entity in entities"
             v-bind:class="{ selected : selectedId == entity.id }"
             :key="entity.id"
@@ -28,7 +25,6 @@
           <td> {{ entity.address.neighbour }} </td>
           <td> {{ entity.address.city }} </td>
         </tr>
-      </tbody>
     </table>
   </div>
 </template>
