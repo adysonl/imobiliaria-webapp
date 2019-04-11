@@ -11,9 +11,9 @@
     </div>
 
     <div class="form-group" style="width: 30%">
-      <label for="nationalType">CPF/CNPJ</label>
+      <label for="nationalType">TIPO DE PESSOA</label>
       <select name="nationalType" v-model="entity.nationalType" required>
-        <option v-for="item in nationalTypes" :value="item.key" :key="item.key">item.value</option>
+        <option v-for="item in nationalTypes" :value="item.key" :key="item.key">{{ item.value }}</option>
       </select>
     </div>
     <div class="form-group" style="width: 32.5%">
