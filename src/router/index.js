@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/home/Home'
 import ClientsList from '@/components/client/ClientsList'
 import ClientEdit from '@/components/client/ClientEdit'
+import PropertyEdit from '@/components/property/PropertyEdit'
+import PropertyList from '@/components/property/PropertyList'
 import Authentication from '@/components/auth/Authentication'
 import SignIn from '@/components/auth/SignIn'
 import SignUp from '@/components/auth/SignUp'
@@ -27,12 +29,22 @@ var router = new Router({
         },
         {
           name: 'ClientEdit',
-          path: 'clientes/edit/:id',
+          path: 'clientes/editar/:id',
           component: ClientEdit
         },
         {
           path: 'imoveis',
-          component: HelloWorld
+          component: PropertyList
+        },
+        {
+          name: 'PropertyNew',
+          path: 'imoveis/novo',
+          component: PropertyEdit
+        },
+        {
+          name: 'PropertyEdit',
+          path: 'imoveis/editar/:id',
+          component: PropertyEdit
         },
         {
           path: 'contratos',
