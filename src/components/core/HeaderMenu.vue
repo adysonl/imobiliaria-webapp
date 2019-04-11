@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="logo">
-      <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" /></router-link>
+      <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" alt="AeR corretores!" /></router-link>
       <button class="logout-btn" @click.prevent="logout()">
         sair
       </button>
@@ -37,24 +37,6 @@ export default {
   }
 }
 </script>
-
-<template>
-  <nav>
-    <div class="logo">
-      <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" /></router-link>
-      <button class="logout-btn" @click.prevent="logout()">
-        sair
-      </button>
-    </div>
-
-      <ul class="menu">
-        <li v-for="item in items" :key="item.index">
-          <router-link :to="item.url">{{ item.title }}</router-link>
-        </li>
-      </ul>
-  </nav>
-</template>
-
 <script>
 export default {
   name: 'HeaderMenu',

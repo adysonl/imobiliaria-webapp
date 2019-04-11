@@ -1,15 +1,15 @@
 <template>
   <div id="login" class="auth login centered">
-    <img src="../../assets/images/login.png"/>
+    <a href="#" title="AeR corretores login"><img src="../../assets/images/login.png" alt="AeR corretores login"/></a>
     <form>
       <div class="form-group">
         <label for="username">USERNAME</label>
-        <input v-model="username" name="username" type="text" required>
+        <input v-model="username" id="username" name="username" type="text" required>
       </div>
 
       <div class="form-group">
-        <label for="username">SENHA</label>
-        <input v-model="password" name="password" type="password" required minlength="6">
+        <label for="password">SENHA</label>
+        <input v-model="password" id="password" name="password" type="password" required minlength="6">
         <div class="error">{{ error }}</div>
       </div>
       <button @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>

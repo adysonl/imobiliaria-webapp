@@ -1,6 +1,6 @@
 <template>
   <form class="edit-form">
-    <div class="title row center"><span>cadastro de cliente</span></div>
+    <div class="title row center"><span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }} cliente</span></div>
     <div class="form-group" style="width: 65%">
       <label for="name">NOME</label>
       <input id="name" name="name" v-model="entity.name" type="text" required/>

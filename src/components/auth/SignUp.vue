@@ -1,25 +1,25 @@
 <template>
   <div id="login" class="auth signup centered">
-    <img src="../../assets/images/login.png"/>
+    <a href="#" title="AeR corretores Cadastro"><img src="../../assets/images/login.png" alt="AeR corretores cadastro"/></a>
     <form>
       <div class="form-group">
         <label for="name">NOME</label>
-        <input v-model="user.name" name="name" type="text" required>
+        <input v-model="user.name" id="name" name="name" type="text" required>
       </div>
 
       <div class="form-group">
         <label for="email">EMAIL</label>
-        <input v-model="user.email" name="email" type="email" required>
+        <input v-model="user.email" id="email" name="email" type="email" required>
       </div>
 
       <div class="form-group">
         <label for="username">USERNAME</label>
-        <input v-model="user.login" name="username" type="text" required>
+        <input v-model="user.login" id="username" name="username" type="text" required>
       </div>
 
       <div class="form-group">
         <label for="password">SENHA</label>
-        <input v-model="user.password" name="password" type="password" required minlength="6">
+        <input v-model="user.password" id="password" name="password" type="password" required minlength="6">
         <div class="error">{{ error }}</div>
       </div>
 
