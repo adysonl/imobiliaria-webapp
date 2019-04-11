@@ -3,6 +3,7 @@
     <div class="list-options">
       <router-link :to="{ name: 'ClientNew' }"><button>Adicionar</button></router-link>
       <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
+      <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
     </div>
     <table class="data-table">
       <thead>
@@ -37,19 +38,7 @@ import axios from 'axios'
 
 export default {
   created () {
-    const token = localStorage.getItem('token')
-    if (token) {
-      axios.get('http://localhost:3000/client', {headers: {'x-access-token': token}})
-        .then(response => {
-          this.entities = response.data
-          console.log(response)
-        })
-        .catch(e => {
-          this.error = e.response.data.error
-        })
-    } else {
-      this.$router.push({name: 'Auth'})
-    }
+    this.getItems()
   },
   data () {
     return {
@@ -61,6 +50,34 @@ export default {
       },
       edit: function () {
         this.$router.push({name: 'ClientEdit', params: {id: this.selectedId}})
+      },
+      remove: function () {
+        const token = localStorage.getItem('token')
+        if (token) {
+          axios.delete('http://localhost:3000/client/' + this.selectedId, {headers: {'x-access-token': token}})
+            .then(response => {
+              this.getItems()
+            })
+            .catch(e => {
+              this.error = e.response.data.error
+            })
+        } else {
+          this.$router.push({name: 'Auth'})
+        }
+      },
+      getItems: function () {
+        const token = localStorage.getItem('token')
+        if (token) {
+          axios.get('http://localhost:3000/client', {headers: {'x-access-token': token}})
+            .then(response => {
+              this.entities = response.data
+            })
+            .catch(e => {
+              this.error = e.response.data.error
+            })
+        } else {
+          this.$router.push({name: 'Auth'})
+        }
       }
     }
   }
