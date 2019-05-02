@@ -65,6 +65,7 @@ export default {
           {headers: {'x-access-token': token}})
           .then(response => {
             this.entity = response.data
+            console.log(this.entity)
           })
           .catch(e => {
             this.error = e.response.data.error
@@ -104,9 +105,9 @@ export default {
       submit: function () {
         const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios.put('http://localhost:3000/immobile' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
+          axios.put('http://localhost:3000/immobile/' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log('editou')
+              console.log(response)
             }
           )
         } else {

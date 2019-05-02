@@ -87,7 +87,7 @@ export default {
       submit: function () {
         const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios.put('http://localhost:3000/client' + this.entity.id, this.entity, {headers: {'x-access-token': token}}).then(
+          axios.put('http://localhost:3000/client/' + this.entity.id, this.entity, {headers: {'x-access-token': token}}).then(
             response => {
               console.log('editou')
             }
