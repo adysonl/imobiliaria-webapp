@@ -24,7 +24,7 @@
     </div>
     <div class="form-group" style="width: 12.5%">
       <label for="street_number">NÚMERO</label>
-      <input id="street_number" name="street_number" v-model="entity.address.street_number" type="text" required/>
+      <input id="street_number" name="street_number" v-model="entity.address.streetNumber" type="text" required/>
     </div>
     <div class="form-group" style="width: 30%">
       <label for="city">CIDADE</label>
@@ -36,7 +36,7 @@
     </div>
         <div class="form-group" style="width: 32.5%">
       <label for="state">COMPLEMENTO</label>
-      <input id="state" name="state" v-model="entity.address.state" type="text" required/>
+      <input id="state" name="state" v-model="entity.address.complement" type="text" required/>
     </div>
     <div class="row-right">
       <button @click.prevent="submit()" type="submit">SALVAR</button>
@@ -52,6 +52,14 @@ export default {
     const token = localStorage.getItem('token')
     const id = this.$route.params.id
     if (token) {
+      axios.get('http://localhost:3000/client/',
+        {headers: {'x-access-token': token}})
+        .then(response => {
+          this.locators = response.data
+        })
+        .catch(e => {
+          this.error = e.response.data.error
+        })
       if (id) {
         axios.get('http://localhost:3000/immobile/' + id,
           {headers: {'x-access-token': token}})
@@ -68,10 +76,20 @@ export default {
   },
   data () {
     return {
+      locators: [],
       entity: {
         id: '',
-        address: '',
-        nationalId: ''
+        address: {
+          street: '',
+          streetNumber: '',
+          neighbour: '',
+          city: '',
+          state: '',
+          country: '',
+          complement: ''
+        },
+        nationalId: '',
+        rooms: ''
       },
       nationalTypes: [
         {
@@ -86,7 +104,7 @@ export default {
       submit: function () {
         const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios.put('http://localhost:3000/immobile' + this.entity.id, this.entity, {headers: {'x-access-token': token}}).then(
+          axios.put('http://localhost:3000/immobile' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
             response => {
               console.log('editou')
             }
