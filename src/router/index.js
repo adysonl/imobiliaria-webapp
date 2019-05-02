@@ -9,6 +9,7 @@ import PropertyList from '@/components/property/PropertyList'
 import Authentication from '@/components/auth/Authentication'
 import SignIn from '@/components/auth/SignIn'
 import SignUp from '@/components/auth/SignUp'
+import ContractList from '@/components/contracts/ContractList'
 
 Vue.use(Router)
 var router = new Router({
@@ -48,7 +49,7 @@ var router = new Router({
         },
         {
           path: 'contratos',
-          component: HelloWorld
+          component: ContractList
         },
         {
           path: 'pagamentos',
