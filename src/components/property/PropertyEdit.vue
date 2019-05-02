@@ -46,7 +46,6 @@
 
 <script>
 import axios from 'axios'
-
 export default {
   created () {
     const token = localStorage.getItem('token')
@@ -135,27 +134,22 @@ export default {
     width: 100%;
     height: 30px;
   }
-
   .edit-form .form-group {
     display: inline-block;
     margin: 1%;
   }
-
   .edit-form select {
     height: 36px;
   }
-
   .row {
     width: 100%;
     padding: 0;
   }
-
   .row-right{
     width: 99%;
     text-align: right;
     padding-right: 1%;
   }
-
   .center {
     text-align: center;
   }
@@ -165,5 +159,4 @@ export default {
     font-weight: bold;
     text-transform: uppercase;
   }
-
 </style>

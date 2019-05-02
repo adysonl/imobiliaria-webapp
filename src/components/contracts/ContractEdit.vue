@@ -57,70 +57,70 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  created() {
-    const token = localStorage.getItem("token");
-    const id = this.$route.params.id;
+  created () {
+    const token = localStorage.getItem('token')
+    const id = this.$route.params.id
     if (token) {
       if (id) {
         axios
-          .get('http://localhost:3000/contracts/'+ id, {
-            headers: { "x-access-token": token }
+          .get('http://localhost:3000/contracts/' + id, {
+            headers: { 'x-access-token': token }
           })
           .then(response => {
-            this.entity = response.data;
+            this.entity = response.data
           })
           .catch(e => {
-            this.error = e.response.data.error;
-          });
+            this.error = e.response.data.error
+          })
       }
     } else {
-      this.$router.push({ name: "Auth" });
+      this.$router.push({ name: 'Auth' })
     }
   },
-  data() {
+  data () {
     return {
       entity: {
         id: '',
         locator: '',
         renter: '',
         guarantor: '',
-        immobile:'',
-        startDate:'',
+        immobile: '',
+        startDate: '',
         endDate: '',
-        hasGarage:'',
+        hasGarage: '',
         condo: ''
       },
       submit: function () {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token')
         if (this.entity.id) {
           axios
             .put(
               'http://localhost:3000/contracts' + this.entity.id,
               this.entity,
               {
-                headers: { "x-access-token": token }
+                headers: { 'x-access-token': token }
               }
             )
             .then(response => {
-              console.log('editou');
-            });
+              console.log('editou')
+            })
         } else {
-          this.entity.id = '';
+          this.entity.id = ''
           axios
             .post('http://localhost:3000/contracts', this.entity, {
-              headers: { "x-access-token": token }
+              headers: { 'x-access-token': token }
             })
             .then(response => {
-              console.log('salvou');
-            });
+              console.log('salvou')
+            })
         }
       }
-    };
+    }
   }
-};
+}
 </script>
 
 <style>
