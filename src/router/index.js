@@ -10,6 +10,7 @@ import Authentication from '@/components/auth/Authentication'
 import SignIn from '@/components/auth/SignIn'
 import SignUp from '@/components/auth/SignUp'
 import ContractList from '@/components/contracts/ContractList'
+import ContractEdit from '@/components/contracts/ContractEdit'
 
 Vue.use(Router)
 var router = new Router({
@@ -50,6 +51,11 @@ var router = new Router({
         {
           path: 'contratos',
           component: ContractList
+        },
+        {
+          name: 'ContractNew',
+          path: 'contratos/novo',
+          component: ContractEdit
         },
         {
           path: 'pagamentos',
