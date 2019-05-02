@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Dashboard from '@/components/Dashboard'
 import Home from '@/components/home/Home'
 import ClientsList from '@/components/client/ClientsList'
 import ClientEdit from '@/components/client/ClientEdit'
@@ -18,8 +18,14 @@ var router = new Router({
     {
       path: '/',
       name: 'Home',
+      redirect: { name: 'Dash'},
       component: Home,
       children: [
+        {
+          name: 'Dash',
+          path: '/dashboard',
+          component: Dashboard
+        },
         {
           path: 'clientes',
           component: ClientsList
@@ -59,7 +65,7 @@ var router = new Router({
         },
         {
           path: 'pagamentos',
-          component: HelloWorld
+          component: PaymentList
         }
       ]
     },

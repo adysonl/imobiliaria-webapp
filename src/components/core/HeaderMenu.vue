@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       items: [
-        {title: 'início', url: '/'},
+        {title: 'início', url: '/dashboard'},
         {title: 'clientes', url: '/clientes'},
         {title: 'imóveis', url: '/imoveis'},
         {title: 'contratos', url: '/contratos'},
@@ -43,7 +43,7 @@ export default {
   data () {
     return {
       items: [
-        {title: 'início', url: '/'},
+        {title: 'início', url: '/dashboard'},
         {title: 'clientes', url: '/clientes'},
         {title: 'imóveis', url: '/imoveis'},
         {title: 'contratos', url: '/contratos'},
