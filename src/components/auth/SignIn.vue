@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import UserService from '@/services/user.service'
 
 export default {
   data () {
@@ -28,14 +28,13 @@ export default {
       error: '',
       password: '',
       submit: function (event) {
-        axios.post('http://localhost:3000/auth/login', {login: this.username, password: this.password})
-          .then(response => {
-            localStorage.setItem('token', response.data.token)
-            this.$router.push('/')
-          })
-          .catch(e => {
-            this.error = e.response.data.error
-          })
+        UserService.login(this.username, this.password).then(response => {
+          this.$router.push('/')
+        }).catch(e => {
+          this.error = e.response.data.error
+        }
+
+        )
       }
     }
   }

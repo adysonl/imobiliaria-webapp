@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import UserService from '@/services/user.service'
 
 export default {
   data () {
@@ -46,7 +46,7 @@ export default {
       },
       error: '',
       submit: function (event) {
-        axios.post('http://localhost:3000/auth/signup', this.user)
+        UserService.signup(this.user)
           .then(response => {
             this.$router.push('/')
           })
