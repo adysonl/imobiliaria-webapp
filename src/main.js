@@ -3,8 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import ApiService from '@/services/api.service'
 Vue.config.productionTip = false
+ApiService.init('http://localhost:3000')
 
 /* eslint-disable no-new */
 new Vue({
