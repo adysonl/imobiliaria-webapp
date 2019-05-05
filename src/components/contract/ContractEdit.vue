@@ -66,7 +66,7 @@ export default {
     if (token) {
       if (id) {
         axios
-          .get('http://localhost:3000/contracts/' + id, {
+          .get('http://localhost:3000/contract/' + id, {
             headers: { 'x-access-token': token }
           })
           .then(response => {
@@ -98,7 +98,7 @@ export default {
         if (this.entity.id) {
           axios
             .put(
-              'http://localhost:3000/contracts' + this.entity.id,
+              'http://localhost:3000/contract' + this.entity.id,
               this.entity,
               {
                 headers: { 'x-access-token': token }
@@ -110,7 +110,7 @@ export default {
         } else {
           this.entity.id = ''
           axios
-            .post('http://localhost:3000/contracts', this.entity, {
+            .post('http://localhost:3000/contract', this.entity, {
               headers: { 'x-access-token': token }
             })
             .then(response => {

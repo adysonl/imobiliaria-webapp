@@ -46,7 +46,6 @@ export default {
       contracts: [],
       payments: [],
       getItems: function () {
-        console.log('aaaa')
         const token = localStorage.getItem('token')
         if (token) {
           axios.get('http://localhost:3000/contract?status=expired', {headers: {'x-access-token': token}})

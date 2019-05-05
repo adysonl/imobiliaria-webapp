@@ -62,9 +62,9 @@ export default {
           this.$router.push({name: 'Auth'})
         }
       },
-    print: function () {
+      print: function () {
         this.$router.push({name: 'PaymentPrint', params: this.entities.get(this.selectItem)})
-    }
+      }
     }
   }
 }
