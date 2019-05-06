@@ -12,7 +12,7 @@
         <input v-model="password" id="password" name="password" type="password" required minlength="6">
         <div class="error">{{ error }}</div>
       </div>
-      <button @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>
+      <button type="submit" @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>
     </form>
     <div class="back-link"><router-link :to="{name: 'Auth'}">← Voltar</router-link></div>
   </div>

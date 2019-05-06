@@ -2,9 +2,9 @@
   <div>
     <div class="list-options">
       <router-link :to="{ name: defs.className + 'New' }" v-if="!disableAdd"><button>Adicionar</button></router-link>
-      <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
-      <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
-      <button :disabled="!selectedId" @click.prevent="print()" v-if="enablePrint">Imprimir</button>
+      <button type="submit" :disabled="!selectedId" @click.prevent="edit()">Editar</button>
+      <button type="submit" :disabled="!selectedId" @click.prevent="remove()">Remover</button>
+      <button type="submit" :disabled="!selectedId" @click.prevent="print()" v-if="enablePrint">Imprimir</button>
 
     </div>
     <table class="data-table" :summary="defs.title">

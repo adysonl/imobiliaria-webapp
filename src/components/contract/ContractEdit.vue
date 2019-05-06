@@ -37,12 +37,12 @@
       <input id="condo" name="condo" v-model="entity.condo" type="text" required>
     </div>
     <div class="form-group" style="width: 22%">
-      <label for>Multa</label>
-      <input id name type="text" required>
+      <label for="fine">Multa</label>
+      <input id="fine" name="fine" type="text" required>
     </div>
     <div class="form-group" style="width: 22%">
-      <label for>juros(a.d)</label>
-      <input id name type="text" required>
+      <label for="interest">juros(a.d)</label>
+      <input id="interest" name="interest" type="text" required>
     </div>
     <div class="row-right">
       <button @click.prevent="submit()" type="submit">SALVAR</button>

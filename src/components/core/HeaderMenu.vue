@@ -2,7 +2,7 @@
   <nav>
     <div class="logo">
       <router-link :to="{name: 'Home'}"><img src="../../assets/images/header-logo.png" alt="AeR corretores!" /></router-link>
-      <button class="logout-btn" @click.prevent="logout()">
+      <button type="submit" class="logout-btn" @click.prevent="logout()">
         sair
       </button>
     </div>

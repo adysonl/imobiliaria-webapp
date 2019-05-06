@@ -35,8 +35,8 @@
       <input id="state" name="state" v-model="entity.address.state" type="text" required/>
     </div>
         <div class="form-group" style="width: 32.5%">
-      <label for="state">COMPLEMENTO</label>
-      <input id="state" name="state" v-model="entity.address.complement" type="text" required/>
+      <label for="complement">COMPLEMENTO</label>
+      <input id="complement" name="complement" v-model="entity.address.complement" type="text" required/>
     </div>
     <div class="row-right">
       <button @click.prevent="submit()" type="submit">SALVAR</button>

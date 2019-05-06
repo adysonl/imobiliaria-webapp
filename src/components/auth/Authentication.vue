@@ -4,8 +4,8 @@
       <img src="../../assets/images/init-page.png" alt="AeR corretores tela de início"/>
       </a>
     <br/>
-    <router-link :to="{name: 'SignIn'}"><button> Login </button></router-link>
-    <router-link :to="{name: 'SignUp'}"><button> Cadastrar </button></router-link>
+    <router-link :to="{name: 'SignIn'}"><button type="submit"> Login </button></router-link>
+    <router-link :to="{name: 'SignUp'}"><button type="submit"> Cadastrar </button></router-link>
     <router-view/>
   </div>
 </template>

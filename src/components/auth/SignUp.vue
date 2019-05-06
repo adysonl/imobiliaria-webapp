@@ -23,7 +23,7 @@
         <div class="error">{{ error }}</div>
       </div>
 
-      <button @click.prevent="submit($event)"
+      <button type="submit" @click.prevent="submit($event)"
       :disabled="!user.login || !user.password || !user.email || !user.name">
         cadastrar
       </button>
