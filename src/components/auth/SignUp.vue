@@ -34,6 +34,7 @@
 
 <script>
 import UserService from '@/services/user.service'
+import AlertService from '@/services/alert.service'
 
 export default {
   data () {
@@ -48,6 +49,7 @@ export default {
       submit: function (event) {
         UserService.signup(this.user)
           .then(response => {
+            AlertService.sucess()
             this.$router.push('/')
           })
           .catch(e => {

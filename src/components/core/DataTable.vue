@@ -8,7 +8,7 @@
       <button type="submit" :disabled="!selectedId" @click.prevent="print()" v-if="enablePrint">Imprimir</button>
 
     </div>
-    <table class="data-table" :summary="defs.title">
+    <table class="data-table" :summary="defs.title" tabindex="0">
       <tr>
         <th v-for="column in columns" :key="column.index"> {{ column.title }} </th>
       </tr>

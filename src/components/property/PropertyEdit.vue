@@ -46,6 +46,8 @@
 
 <script>
 import axios from 'axios'
+import AlertService from '@/services/alert.service'
+
 export default {
   created () {
     const token = localStorage.getItem('token')
@@ -114,6 +116,8 @@ export default {
               console.log('salvou')
             })
         }
+        AlertService.sucess()
+        this.$router.push('/property')
       }
     }
   }

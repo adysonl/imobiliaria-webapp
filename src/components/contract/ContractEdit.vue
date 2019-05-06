@@ -52,6 +52,7 @@
 
 <script>
 import ApiService from '@/services/api.service'
+import AlertService from '@/services/alert.service'
 
 export default {
   created () {
@@ -99,6 +100,8 @@ export default {
           this.entity.id = ''
           ApiService.post('/contract', this.entity)
         }
+        AlertService.sucess()
+        this.$router.push('/contract')
       }
     }
   }

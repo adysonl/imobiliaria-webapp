@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios'
+import AlertService from '@/services/alert.service'
 
 export default {
   created () {
@@ -101,6 +102,8 @@ export default {
               console.log('salvou')
             })
         }
+        AlertService.sucess()
+        this.$router.push('/clientes')
       }
     }
   }
