@@ -53,7 +53,7 @@
 <script>
 import ApiService from '@/services/api.service'
 import AlertService from '@/services/alert.service'
-
+import moment from 'moment'
 export default {
   created () {
     const id = this.$route.params.id
@@ -61,6 +61,8 @@ export default {
       ApiService.get('contract/' + id)
         .then(response => {
           this.entity = response.data
+          this.entity.startDate = moment(this.entity.startDate).format('MM/DD/YYYY')
+          this.entity.endDate = moment(this.entity.endDate).format('MM/DD/YYYY')
         })
         .catch(e => {
           this.error = e.response.data.error
@@ -91,9 +93,10 @@ export default {
         condo: ''
       },
       submit: function () {
+        console.log(this.entity)
         if (this.entity.id) {
           ApiService.put(
-            '/contract' + this.entity.id,
+            '/contract/' + this.entity.id,
             this.entity
           )
         } else {
@@ -101,7 +104,7 @@ export default {
           ApiService.post('/contract', this.entity)
         }
         AlertService.sucess()
-        this.$router.push('/contract')
+        this.$router.push('/contratos')
       }
     }
   }

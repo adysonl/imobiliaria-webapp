@@ -117,7 +117,7 @@ export default {
             })
         }
         AlertService.sucess()
-        this.$router.push('/property')
+        this.$router.push('/imoveis')
       }
     }
   }
