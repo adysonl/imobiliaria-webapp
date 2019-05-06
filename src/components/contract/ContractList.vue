@@ -1,5 +1,5 @@
 <template>
-  <DataTable :defs="defs" :columns="columns"/>
+  <DataTable :defs="defs" :columns="columns" enable-print="true"/>
 </template>
 
 <script>

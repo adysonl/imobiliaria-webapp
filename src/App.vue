@@ -17,7 +17,12 @@ export default {
     --gray: #cbc8bf;
     --white: #ffffff;
   }
-
+  h1 {
+    font-size: 26px;
+    color: var(--med);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
   .centered {
     position:absolute;
     left:0; right:0;

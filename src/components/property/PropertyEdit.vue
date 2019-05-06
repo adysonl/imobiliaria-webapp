@@ -1,7 +1,7 @@
 <template>
   <form class="edit-form">
-    <div class="title row center">
-      <span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</span>
+    <div class="row center">
+      <h1 tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</h1>
     </div>
 
     <div class="form-group" style="width: 75%">
@@ -150,11 +150,5 @@ export default {
   }
   .center {
     text-align: center;
-  }
-  .edit-form .title{
-    font-size: 26px;
-    color: var(--med);
-    font-weight: bold;
-    text-transform: uppercase;
   }
 </style>

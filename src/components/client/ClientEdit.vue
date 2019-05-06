@@ -1,6 +1,8 @@
 <template>
   <form class="edit-form">
-    <div class="title row center"><span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }} cliente</span></div>
+    <div class="row center">
+      <h1 tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }} cliente</h1>
+      </div>
     <div class="form-group" style="width: 65%">
       <label for="name">NOME</label>
       <input id="name" name="name" v-model="entity.name" type="text" required/>
@@ -141,11 +143,4 @@ export default {
   .center {
     text-align: center;
   }
-  .edit-form .title{
-    font-size: 26px;
-    color: var(--med);
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
 </style>
