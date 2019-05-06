@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ defs.title }}</h1>
+    <h1 tabindex="0">{{ defs.title }}</h1>
     <div class="list-options">
       <router-link :to="{ name: defs.className + 'New' }" v-if="!disableAdd"><button>Adicionar</button></router-link>
       <button type="submit" :disabled="!selectedId" @click.prevent="edit()">Editar</button>
