@@ -77,7 +77,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .dash-table {
-  width: 50% !important;
   display: inline;
 }
 

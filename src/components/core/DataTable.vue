@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="list-options">
-      <router-link :to="{ name: defs.className + 'New' }"><button>Adicionar</button></router-link>
+      <router-link :to="{ name: defs.className + 'New' }" v-if="!disableAdd"><button>Adicionar</button></router-link>
       <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
       <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
+      <button :disabled="!selectedId" @click.prevent="print()" v-if="enablePrint">Imprimir</button>
+
     </div>
     <table class="data-table" :summary="defs.title">
       <tr>
@@ -14,7 +16,7 @@
           :key="entity.id"
           @click.prevent="selectItem(entity.id)">
         <td v-for="column in columns" :key="column.index">
-          {{ column.getValue ? column.getValue(entity[column.field]) : entity[column.field]  }}
+          {{ column.getValue ? column.getValue(entity[column.field]) : entity[column.field] }}
           </td>
       </tr>
     </table>
@@ -28,7 +30,7 @@ export default {
   created () {
     this.getItems()
   },
-  props: ['defs', 'columns'],
+  props: ['defs', 'columns', 'disableAdd', 'enablePrint'],
   data () {
     return {
       name: 'DataTable',
@@ -37,6 +39,9 @@ export default {
       selectItem: function (id) {
         this.selectedId = id
         console.log(this.selectedId)
+      },
+      print: function () {
+        this.$router.push({ name: this.defs.className + 'Print', params: { id: this.selectedId } })
       },
       edit: function () {
         this.$router.push({ name: this.defs.className + 'Edit', params: { id: this.selectedId } })

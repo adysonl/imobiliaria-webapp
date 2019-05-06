@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       defs: {
-        endpoint: '/immobile',
+        endpoint: '/property',
         title: 'Lista de Imóveis',
         className: 'Property'
       },
@@ -29,28 +29,28 @@ export default {
           title: 'Proprietário',
           field: 'locator',
           getValue (locator) {
-            return locator.name
+            return locator ? locator.name : ''
           }
         },
         {
           title: 'Rua',
           field: 'address',
           getValue (address) {
-            return address.street
+            return address ? address.street : ''
           }
         },
         {
           title: 'Bairro',
           field: 'address',
           getValue (address) {
-            return address.neighbour
+            return address ? address.neighbour : ''
           }
         },
         {
           title: 'Cidade',
           field: 'address',
           getValue (address) {
-            return address.city
+            return address ? address.city : ''
           }
         }
       ]

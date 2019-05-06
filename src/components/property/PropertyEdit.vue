@@ -6,13 +6,13 @@
 
     <div class="form-group" style="width: 75%">
       <label for="locator">PROPRIETÁRIO</label>
-      <select id="locator" name="locator" v-model="entity.locator" required>
+      <select id="locator" name="locator" v-model="entity.locatorId" required>
         <option v-for="item in locators" :value="item.id" :key="item.key">{{ item.name }}</option>
       </select>
     </div>
     <div class="form-group" style="width: 20%">
       <label for="rooms">QUARTOS</label>
-      <input id="rooms" name="rooms" v-model="entity.rooms" type="number" required/>
+      <input id="rooms" name="rooms" v-model="entity.bedrooms" type="number" required/>
     </div>
     <div class="form-group" style="width: 50%">
       <label for="street">RUA</label>
@@ -60,11 +60,10 @@ export default {
           this.error = e.response.data.error
         })
       if (id) {
-        axios.get('http://localhost:3000/immobile/' + id,
+        axios.get('http://localhost:3000/property/' + id,
           {headers: {'x-access-token': token}})
           .then(response => {
             this.entity = response.data
-            console.log(this.entity)
           })
           .catch(e => {
             this.error = e.response.data.error
@@ -104,14 +103,13 @@ export default {
       submit: function () {
         const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios.put('http://localhost:3000/immobile/' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
+          axios.put('http://localhost:3000/property/' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log(response)
             }
           )
         } else {
           this.entity.id = ''
-          axios.post('http://localhost:3000/immobile', this.entity, {headers: {'x-access-token': token}}).then(
+          axios.post('http://localhost:3000/property', this.entity, {headers: {'x-access-token': token}}).then(
             response => {
               console.log('salvou')
             })

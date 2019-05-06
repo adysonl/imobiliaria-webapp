@@ -55,6 +55,11 @@ var router = new Router({
           component: () => import('@/components/contract/ContractEdit')
         },
         {
+          name: 'ContractEdit',
+          path: 'contratos/editar/:id',
+          component: () => import('@/components/contract/ContractEdit')
+        },
+        {
           path: 'pagamentos',
           component: () => import('@/components/payment/PaymentList')
         },

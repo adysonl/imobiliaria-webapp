@@ -4,22 +4,16 @@
       <span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }} contratos</span>
     </div>
     <div class="form-group" style="width: 47%">
-      <label for="locator">Locador</label>
-      <input id="locator" name="locator" v-model="entity.locator" type="text" required>
-    </div>
-    <div class="form-group" style="width: 47%">
       <label for="renter">Locatário</label>
-      <input id="renter" name="renter" v-model="entity.renter" type="text" required>
+      <select id="renter" name="renter" v-model="entity.renterId" type="text" required>
+        <option v-for="item in clients" :value="item.id" :key="item.key">{{ item.name }}</option>
+      </select>
     </div>
-
     <div class="form-group" style="width: 47%">
-      <label for="guarantor">Fiador</label>
-      <input id="guarantor" name="guarantor" v-model="entity.guarantor" type="text" required>
-    </div>
-
-    <div class="form-group" style="width: 47%">
-      <label for="immobile">Imóvel</label>
-      <input id="immobile" name="immobile" v-model="entity.immobile" type="text" required>
+      <label for="property">Imóvel</label>
+      <select id="property" name="property" v-model="entity.propertyId" type="text" required>
+        <option v-for="item in properties" :value="item.id" :key="item.key">{{ item.id }}</option>
+      </select>
     </div>
 
     <div class="form-group" style="width: 30%">
@@ -57,65 +51,53 @@
 </template>
 
 <script>
-import axios from 'axios'
+import ApiService from '@/services/api.service'
 
 export default {
   created () {
-    const token = localStorage.getItem('token')
     const id = this.$route.params.id
-    if (token) {
-      if (id) {
-        axios
-          .get('http://localhost:3000/contract/' + id, {
-            headers: { 'x-access-token': token }
-          })
-          .then(response => {
-            this.entity = response.data
-          })
-          .catch(e => {
-            this.error = e.response.data.error
-          })
-      }
-    } else {
-      this.$router.push({ name: 'Auth' })
+    if (id) {
+      ApiService.get('contract/' + id)
+        .then(response => {
+          this.entity = response.data
+        })
+        .catch(e => {
+          this.error = e.response.data.error
+        })
     }
+    ApiService.get('/client')
+      .then(response => {
+        this.clients = response.data
+      })
+    ApiService.get('/property')
+      .then(response => {
+        this.properties = response.data
+      })
   },
   data () {
     return {
+      clients: [],
+      properties: [],
       entity: {
         id: '',
         locator: '',
         renter: '',
         guarantor: '',
-        immobile: '',
+        property: '',
         startDate: '',
         endDate: '',
         hasGarage: '',
         condo: ''
       },
       submit: function () {
-        const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios
-            .put(
-              'http://localhost:3000/contract' + this.entity.id,
-              this.entity,
-              {
-                headers: { 'x-access-token': token }
-              }
-            )
-            .then(response => {
-              console.log('editou')
-            })
+          ApiService.put(
+            '/contract' + this.entity.id,
+            this.entity
+          )
         } else {
           this.entity.id = ''
-          axios
-            .post('http://localhost:3000/contract', this.entity, {
-              headers: { 'x-access-token': token }
-            })
-            .then(response => {
-              console.log('salvou')
-            })
+          ApiService.post('/contract', this.entity)
         }
       }
     }
