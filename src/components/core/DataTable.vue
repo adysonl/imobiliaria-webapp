@@ -2,10 +2,14 @@
   <div>
     <h1 tabindex="0">{{ defs.title }}</h1>
     <div class="list-options">
-      <router-link :to="{ name: defs.className + 'New' }" v-if="!disableAdd"><button>Adicionar</button></router-link>
-      <button type="submit" :disabled="!selectedId" @click.prevent="edit()">Editar</button>
+      <router-link :to="{ name: defs.className + 'New' }" v-if="!hideAdd"><button>Adicionar</button></router-link>
+      <button type="submit" :disabled="!selectedId" @click.prevent="edit()" v-if="!hideEdit">>Editar</button>
       <button type="submit" :disabled="!selectedId" @click.prevent="remove()">Remover</button>
       <button type="submit" :disabled="!selectedId" @click.prevent="print()" v-if="enablePrint">Imprimir</button>
+
+      <button type="submit" v-for="button in buttons"
+        :key="button.title" :disabled="!selectedId"
+        @click.prevent="customAction(button)"> {{ button.title }}</button>
 
     </div>
     <table class="data-table" :summary="defs.title" tabindex="0">
@@ -32,7 +36,13 @@ export default {
   created () {
     this.getItems()
   },
-  props: ['defs', 'columns', 'disableAdd', 'enablePrint'],
+  props: [
+    'defs',
+    'columns',
+    'hideAdd',
+    'hideEdit',
+    'enablePrint',
+    'buttons'],
   data () {
     return {
       name: 'DataTable',
@@ -56,10 +66,16 @@ export default {
         ApiService.delete(this.defs.endpoint + '/' + this.selectedId)
           .then(response => {
             this.getItems()
+            this.selectedId = ''
           })
           .catch(e => {
             this.error = e.response.data.error
           })
+      },
+      customAction (button) {
+        button.action(this.selectedId).then(() => {
+          this.getItems()
+        })
       },
       getItems: function () {
         ApiService.get(this.defs.endpoint)

@@ -52,6 +52,13 @@ export default {
           getValue (address) {
             return address ? address.city : ''
           }
+        },
+        {
+          title: 'Estado',
+          field: 'address',
+          getValue (address) {
+            return address ? address.state : ''
+          }
         }
       ]
     }

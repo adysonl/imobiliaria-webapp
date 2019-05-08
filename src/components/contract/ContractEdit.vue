@@ -98,11 +98,17 @@ export default {
           ApiService.put(
             '/contract/' + this.entity.id,
             this.entity
-          )
+          ).then(response => {
+            this.notify()
+          })
         } else {
           this.entity.id = ''
-          ApiService.post('/contract', this.entity)
+          ApiService.post('/contract', this.entity).then(response => {
+            this.notify()
+          })
         }
+      },
+      notify () {
         AlertService.sucess()
         this.$router.push('/contratos')
       }

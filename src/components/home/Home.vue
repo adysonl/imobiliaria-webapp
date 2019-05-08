@@ -14,8 +14,7 @@ export default {
 
 <style>
   .content {
-    width: 70%;
-    margin-left: 12%;
-    margin-right: 12%;
+    width: 86%;
+    margin-left: 6%;
   }
 </style>

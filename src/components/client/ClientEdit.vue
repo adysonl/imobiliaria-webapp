@@ -92,16 +92,18 @@ export default {
         if (this.entity.id) {
           axios.put('http://localhost:3000/client/' + this.entity.id, this.entity, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log('editou')
+              this.notify()
             }
           )
         } else {
           this.entity.id = ''
           axios.post('http://localhost:3000/client', this.entity, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log('salvou')
+              this.notify()
             })
         }
+      },
+      notify () {
         AlertService.sucess()
         this.$router.push('/clientes')
       }

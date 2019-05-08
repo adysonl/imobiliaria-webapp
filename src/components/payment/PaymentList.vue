@@ -1,11 +1,15 @@
 <template>
-  <DataTable :defs="defs" :columns="columns" disable-add="true" enable-print="true"/>
+  <DataTable :defs="defs" :columns="columns"
+    :buttons="buttons" hide-add="true"
+     hide-edit="true" enable-print="true"/>
   <!--<button :disabled="!selectedId" @click.prevent="print()">Imprimir</button>-->
 </template>
 
 <script>
 import DataTable from '@/components/core/DataTable'
-// import moment from 'moment'
+import ApiService from '@/services/api.service'
+import AlertService from '@/services/alert.service'
+import moment from 'moment'
 
 export default {
   components: {
@@ -13,6 +17,18 @@ export default {
   },
   data () {
     return {
+      buttons: [
+        {
+          title: 'Pagar',
+          action: function (id) {
+            return ApiService.put('/payment/' + id + '/pay').then(
+              () => {
+                AlertService.sucess()
+              }
+            )
+          }
+        }
+      ],
       defs: {
         endpoint: '/payment',
         title: 'Lista de Pagamentos',
@@ -41,12 +57,27 @@ export default {
           title: 'Valor Total',
           field: 'contract',
           getValue (contract) {
-            return contract ? contract.value + contract.condo : ''
+            var value = contract.value + contract.condo
+            if (!String(value).match(/^-?\d+\.\d+$/)) {
+              value += '.00'
+            }
+            return 'R$ ' + value
           }
         },
         {
           title: 'Vencimento',
-          field: 'dueDate'
+          field: 'dueDate',
+          getValue (date) {
+            return moment(String(date)).format('MM/DD/YYYY')
+          }
+        },
+        {
+          title: 'Situação',
+          field: 'status',
+          getValue (key) {
+            const status = {'late': 'Atrasado', 'pending': 'Pendente', 'paid': 'Pago'}
+            return status[key]
+          }
         }
       ]
     }

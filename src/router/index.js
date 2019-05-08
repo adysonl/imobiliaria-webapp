@@ -62,10 +62,6 @@ var router = new Router({
         {
           path: 'pagamentos',
           component: () => import('@/components/payment/PaymentList')
-        },
-        {
-          path: 'pagamentos/imprimir',
-          component: () => import('@/components/payment/PaymentPrint')
         }
       ]
     },

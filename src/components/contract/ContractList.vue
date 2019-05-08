@@ -52,11 +52,23 @@ export default {
         },
         {
           title: 'Aluguel',
-          field: 'value'
+          field: 'value',
+          getValue (value) {
+            if (!String(value).match(/^-?\d+\.\d+$/)) {
+              value += '.00'
+            }
+            return 'R$ ' + value
+          }
         },
         {
           title: 'Condomínio',
-          field: 'condo'
+          field: 'condo',
+          getValue (value) {
+            if (!String(value).match(/^-?\d+\.\d+$/)) {
+              value += '.00'
+            }
+            return 'R$ ' + value
+          }
         }
       ]
     }
