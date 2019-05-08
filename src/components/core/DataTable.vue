@@ -26,6 +26,7 @@
 
 <script>
 import ApiService from '@/services/api.service'
+import print from 'print-js'
 
 export default {
   created () {
@@ -39,11 +40,14 @@ export default {
       selectedId: '',
       selectItem: function (id) {
         this.selectedId = id
-        console.log(this.selectedId)
       },
       print: function () {
-        ApiService.get(this.defs.endpoint + '/' + this.selectedId + '/print')
-        this.$router.push({ name: this.defs.className + 'Print', params: { id: this.selectedId } })
+        ApiService.get(this.defs.endpoint + '/' + this.selectedId + '/print').then(
+          response => {
+            const fileURL = response.config.baseURL + response.data
+            print(fileURL)
+          }
+        )
       },
       edit: function () {
         this.$router.push({ name: this.defs.className + 'Edit', params: { id: this.selectedId } })
