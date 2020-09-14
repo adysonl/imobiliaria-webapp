@@ -12,14 +12,14 @@
         <input v-model="password" id="password" name="password" type="password" required minlength="6">
         <div class="error">{{ error }}</div>
       </div>
-      <button @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>
+      <button type="submit" @click.prevent="submit($event)" :disabled="!username || !password">entrar</button>
     </form>
     <div class="back-link"><router-link :to="{name: 'Auth'}">← Voltar</router-link></div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import UserService from '@/services/user.service'
 
 export default {
   data () {
@@ -28,14 +28,13 @@ export default {
       error: '',
       password: '',
       submit: function (event) {
-        axios.post('http://localhost:3000/auth/login', {login: this.username, password: this.password})
-          .then(response => {
-            localStorage.setItem('token', response.data.token)
-            this.$router.push('/')
-          })
-          .catch(e => {
-            this.error = e.response.data.error
-          })
+        UserService.login(this.username, this.password).then(response => {
+          this.$router.push('/')
+        }).catch(e => {
+          this.error = e.response.data.error
+        }
+
+        )
       }
     }
   }

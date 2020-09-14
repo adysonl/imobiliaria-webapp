@@ -1,15 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Home from '@/components/home/Home'
-import ClientsList from '@/components/client/ClientsList'
-import ClientEdit from '@/components/client/ClientEdit'
-import PropertyEdit from '@/components/property/PropertyEdit'
-import PropertyList from '@/components/property/PropertyList'
-import Authentication from '@/components/auth/Authentication'
-import SignIn from '@/components/auth/SignIn'
-import SignUp from '@/components/auth/SignUp'
-import ContractList from '@/components/contracts/ContractList'
+import { TokenService } from '@/services/storage.service.js'
 
 Vue.use(Router)
 var router = new Router({
@@ -17,61 +8,92 @@ var router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      redirect: { name: 'Dash' },
+      component: () => import('@/components/home/Home'),
       children: [
         {
+          name: 'Dash',
+          path: '/dashboard',
+          component: () => import('@/components/Dashboard')
+
+        },
+        {
           path: 'clientes',
-          component: ClientsList
+          component: () => import('@/components/client/ClientList')
         },
         {
           name: 'ClientNew',
           path: 'clientes/novo',
-          component: ClientEdit
+          component: () => import('@/components/client/ClientEdit')
         },
         {
           name: 'ClientEdit',
           path: 'clientes/editar/:id',
-          component: ClientEdit
+          component: () => import('@/components/client/ClientEdit')
         },
         {
           path: 'imoveis',
-          component: PropertyList
+          component: () => import('@/components/property/PropertyList')
         },
         {
           name: 'PropertyNew',
           path: 'imoveis/novo',
-          component: PropertyEdit
+          component: () => import('@/components/property/PropertyEdit')
         },
         {
           name: 'PropertyEdit',
           path: 'imoveis/editar/:id',
-          component: PropertyEdit
+          component: () => import('@/components/property/PropertyEdit')
         },
         {
           path: 'contratos',
-          component: ContractList
+          component: () => import('@/components/contract/ContractList')
+        },
+        {
+          name: 'ContractNew',
+          path: 'contratos/novo',
+          component: () => import('@/components/contract/ContractEdit')
+        },
+        {
+          name: 'ContractEdit',
+          path: 'contratos/editar/:id',
+          component: () => import('@/components/contract/ContractEdit')
         },
         {
           path: 'pagamentos',
-          component: HelloWorld
+          component: () => import('@/components/payment/PaymentList')
         }
       ]
     },
     {
       path: '/auth',
       name: 'Auth',
-      component: Authentication
+      component: () => import('@/components/auth/Authentication'),
+      meta: { isPublic: true }
     },
     {
       path: '/auth/signin',
       name: 'SignIn',
-      component: SignIn
+      component: () => import('@/components/auth/SignIn'),
+      meta: { isPublic: true }
     },
     {
       path: '/auth/signup',
       name: 'SignUp',
-      component: SignUp
+      component: () => import('@/components/auth/SignUp'),
+      meta: { isPublic: true }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const isPublic = to.matched.some(record => record.meta.isPublic)
+  const logged = !!TokenService.getToken()
+  if (!isPublic && !logged) {
+    next({ name: 'Auth' })
+  } else {
+    next()
+  }
+})
+
 export default router

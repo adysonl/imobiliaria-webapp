@@ -1,18 +1,18 @@
 <template>
   <form class="edit-form">
-    <div class="title row center">
-      <span tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</span>
+    <div class="row center">
+      <h1 tabindex="0">{{ entity.id ? 'editar' : 'cadastrar' }}  imóvel</h1>
     </div>
 
     <div class="form-group" style="width: 75%">
       <label for="locator">PROPRIETÁRIO</label>
-      <select id="locator" name="locator" v-model="entity.locator" required>
+      <select id="locator" name="locator" v-model="entity.locatorId" required>
         <option v-for="item in locators" :value="item.id" :key="item.key">{{ item.name }}</option>
       </select>
     </div>
     <div class="form-group" style="width: 20%">
       <label for="rooms">QUARTOS</label>
-      <input id="rooms" name="rooms" v-model="entity.rooms" type="number" required/>
+      <input id="rooms" name="rooms" v-model="entity.bedrooms" type="number" required/>
     </div>
     <div class="form-group" style="width: 50%">
       <label for="street">RUA</label>
@@ -34,9 +34,9 @@
       <label for="state">ESTADO</label>
       <input id="state" name="state" v-model="entity.address.state" type="text" required/>
     </div>
-        <div class="form-group" style="width: 32.5%">
-      <label for="state">COMPLEMENTO</label>
-      <input id="state" name="state" v-model="entity.address.complement" type="text" required/>
+    <div class="form-group" style="width: 32.5%">
+        <label for="complement">COMPLEMENTO</label>
+        <input id="complement" name="complement" v-model="entity.address.complement" type="text" required/>
     </div>
     <div class="row-right">
       <button @click.prevent="submit()" type="submit">SALVAR</button>
@@ -46,6 +46,7 @@
 
 <script>
 import axios from 'axios'
+import AlertService from '@/services/alert.service'
 
 export default {
   created () {
@@ -61,7 +62,7 @@ export default {
           this.error = e.response.data.error
         })
       if (id) {
-        axios.get('http://localhost:3000/immobile/' + id,
+        axios.get('http://localhost:3000/property/' + id,
           {headers: {'x-access-token': token}})
           .then(response => {
             this.entity = response.data
@@ -102,19 +103,23 @@ export default {
           value: 'Pessoa Jurídica'
         }
       ],
+      notify () {
+        AlertService.sucess()
+        this.$router.push('/imoveis')
+      },
       submit: function () {
         const token = localStorage.getItem('token')
         if (this.entity.id) {
-          axios.put('http://localhost:3000/immobile' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
+          axios.put('http://localhost:3000/property/' + this.entity.id, this.entity, this.nationalTypes.values, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log('editou')
+              this.notify()
             }
           )
         } else {
           this.entity.id = ''
-          axios.post('http://localhost:3000/immobile', this.entity, {headers: {'x-access-token': token}}).then(
+          axios.post('http://localhost:3000/property', this.entity, {headers: {'x-access-token': token}}).then(
             response => {
-              console.log('salvou')
+              this.notify()
             })
         }
       }
@@ -135,35 +140,23 @@ export default {
     width: 100%;
     height: 30px;
   }
-
   .edit-form .form-group {
     display: inline-block;
     margin: 1%;
   }
-
   .edit-form select {
     height: 36px;
   }
-
   .row {
     width: 100%;
     padding: 0;
   }
-
   .row-right{
     width: 99%;
     text-align: right;
     padding-right: 1%;
   }
-
   .center {
     text-align: center;
   }
-  .edit-form .title{
-    font-size: 26px;
-    color: var(--med);
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
 </style>

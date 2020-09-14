@@ -23,7 +23,7 @@
         <div class="error">{{ error }}</div>
       </div>
 
-      <button @click.prevent="submit($event)"
+      <button type="submit" @click.prevent="submit($event)"
       :disabled="!user.login || !user.password || !user.email || !user.name">
         cadastrar
       </button>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import UserService from '@/services/user.service'
+import AlertService from '@/services/alert.service'
 
 export default {
   data () {
@@ -46,8 +47,9 @@ export default {
       },
       error: '',
       submit: function (event) {
-        axios.post('http://localhost:3000/auth/signup', this.user)
+        UserService.signup(this.user)
           .then(response => {
+            AlertService.sucess()
             this.$router.push('/')
           })
           .catch(e => {

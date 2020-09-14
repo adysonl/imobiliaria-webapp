@@ -1,110 +1,69 @@
 <template>
-  <div>
-    <div class="list-options">
-      <router-link :to="{ name: 'PropertyNew' }"><button>Adicionar</button></router-link>
-      <button :disabled="!selectedId" @click.prevent="edit()">Editar</button>
-      <button :disabled="!selectedId" @click.prevent="remove()">Remover</button>
-    </div>
-    <table class="data-table" summary="Lista de imóveis">
-        <tr>
-          <th> Código </th>
-          <th> Quartos </th>
-          <th> Proprietário </th>
-          <th> Rua </th>
-          <th> Bairro </th>
-          <th> Cidade </th>
-        </tr>
-        <tr v-for="entity in entities"
-            v-bind:class="{ selected : selectedId == entity.id }"
-            :key="entity.id"
-            @click.prevent="selectItem(entity.id)">
-          <td> {{ entity.id }} </td>
-          <td> {{ entity.rooms }} </td>
-          <td> {{ entity.locator.name }} </td>
-          <td> {{ entity.address.street }} </td>
-          <td> {{ entity.address.neighbour }} </td>
-          <td> {{ entity.address.city }} </td>
-        </tr>
-    </table>
-  </div>
+    <DataTable :defs="defs" :columns="columns"/>
 </template>
 
 <script>
-import axios from 'axios'
+import DataTable from '@/components/core/DataTable'
 
 export default {
-  created () {
-    this.getItems()
+  components: {
+    DataTable
   },
   data () {
     return {
-      entities: [],
-      selectedId: '',
-      selectItem: function (id) {
-        this.selectedId = id
-        console.log(this.selectedId)
+      defs: {
+        endpoint: '/property',
+        title: 'Lista de Imóveis',
+        className: 'Property'
       },
-      edit: function () {
-        this.$router.push({name: 'PropertyEdit', params: {id: this.selectedId}})
-      },
-      remove: function () {
-        const token = localStorage.getItem('token')
-        if (token) {
-          axios.delete('http://localhost:3000/immobile/' + this.selectedId, {headers: {'x-access-token': token}})
-            .then(response => {
-              this.getItems()
-            })
-            .catch(e => {
-              this.error = e.response.data.error
-            })
-        } else {
-          this.$router.push({name: 'Auth'})
+      columns: [
+        {
+          title: 'Código',
+          field: 'id'
+        },
+        {
+          title: 'Quartos',
+          field: 'bedrooms'
+        },
+        {
+          title: 'Proprietário',
+          field: 'locator',
+          getValue (locator) {
+            return locator ? locator.name : ''
+          }
+        },
+        {
+          title: 'Rua',
+          field: 'address',
+          getValue (address) {
+            return address ? address.street : ''
+          }
+        },
+        {
+          title: 'Bairro',
+          field: 'address',
+          getValue (address) {
+            return address ? address.neighbour : ''
+          }
+        },
+        {
+          title: 'Cidade',
+          field: 'address',
+          getValue (address) {
+            return address ? address.city : ''
+          }
+        },
+        {
+          title: 'Estado',
+          field: 'address',
+          getValue (address) {
+            return address ? address.state : ''
+          }
         }
-      },
-      getItems: function () {
-        const token = localStorage.getItem('token')
-        if (token) {
-          axios.get('http://localhost:3000/immobile', {headers: {'x-access-token': token}})
-            .then(response => {
-              this.entities = response.data
-            })
-            .catch(e => {
-              this.error = e.response.data.error
-            })
-        } else {
-          this.$router.push({name: 'Auth'})
-        }
-      }
+      ]
     }
   }
 }
 </script>
-
 <style>
-  .data-table{
-    background: var(--white);
-    border: 1px solid var(--gray);
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .data-table thead {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  .data-table td {
-    border: 0.3px solid var(--gray);
-    padding: 5px;
-  }
-  .list-options {
-    margin-bottom: 15px;
-    width: 100%;
-    text-align: left;
-  }
-  .list-options button {
-    width: 100px;
-  }
-
-  .selected {
-    background: #ddd;
-  }
 </style>
